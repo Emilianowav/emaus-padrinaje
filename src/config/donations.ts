@@ -14,7 +14,7 @@ export type DonationOption = {
 export const SITE = {
   brand: "Emaús",
   title: "Sé un padrino de Emaús",
-  community: "1 Inmaculado Corazón de María (ICM)",
+  community: "\"Inmaculado Corazón de María\" (ICM) I",
   subtitle: "Tu aporte es muy importante.",
   quote: "Dios no se deja ganar en generosidad.",
   footerNote: "Pago seguro a través de Mercado Pago",
