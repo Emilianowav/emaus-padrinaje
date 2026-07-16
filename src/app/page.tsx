@@ -37,7 +37,7 @@ export default function HomePage() {
 
           <div className="mt-14 animate-fade-up opacity-0 [animation-delay:420ms] sm:mt-16">
             <p className="mb-5 text-sm font-medium uppercase tracking-[0.14em] text-ink-muted">
-              Elegí tu aporte
+              Hacé tu aporte
             </p>
             <DonationButtons />
           </div>
