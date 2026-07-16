@@ -5,7 +5,7 @@
 :root {
   --background: #f3f5f7;
   --foreground: #1a2332;
-  --accent: #2f5d50;
+  --accent: #1a2a5a;
 }
 
 html {
@@ -20,6 +20,6 @@ body {
 }
 
 ::selection {
-  background: #c8ddd6;
+  background: #c8d0e6;
   color: #1a2332;
 }

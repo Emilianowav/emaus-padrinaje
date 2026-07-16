@@ -1,11 +1,7 @@
 /**
  * Links de pago de Mercado Pago
  * --------------------------------
- * Por ahora hay un solo link (monto libre).
- * Para agregar montos fijos después, sumá más objetos al array.
- *
- * Ejemplo:
- *   { id: "5000", label: "$5.000", description: "Aporte mensual", url: "https://mpago.la/xxxxx" }
+ * Para agregar o cambiar montos, editá este array.
  */
 
 export type DonationOption = {
@@ -26,13 +22,13 @@ export const SITE = {
 export const STEPS = [
   {
     number: "01",
-    title: "Hacé clic en donar",
-    text: "Te redirigimos a Mercado Pago de forma segura.",
+    title: "Elegí un monto",
+    text: "Seleccioná el aporte con el que querés acompañar.",
   },
   {
     number: "02",
-    title: "Elegí el monto",
-    text: "Indicá el aporte con el que querés acompañar.",
+    title: "Hacé clic en donar",
+    text: "Te redirigimos a Mercado Pago de forma segura.",
   },
   {
     number: "03",
@@ -43,9 +39,21 @@ export const STEPS = [
 
 export const DONATION_OPTIONS: DonationOption[] = [
   {
-    id: "donacion-libre",
-    label: "Donar",
-    description: "Elegí el monto en Mercado Pago",
-    url: "https://link.mercadopago.com.ar/emausctesdonacion",
+    id: "10000",
+    label: "$10.000",
+    description: "Aporte solidario",
+    url: "https://mpago.la/1MKzW8q",
+  },
+  {
+    id: "20000",
+    label: "$20.000",
+    description: "Aporte padrino",
+    url: "https://mpago.la/28vdSXT",
+  },
+  {
+    id: "50000",
+    label: "$50.000",
+    description: "Aporte especial",
+    url: "https://mpago.la/1S3WZj5",
   },
 ];

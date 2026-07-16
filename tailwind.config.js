@@ -18,9 +18,9 @@ module.exports = {
           warm: "#efeae2",
         },
         pine: {
-          DEFAULT: "#2f5d50",
-          deep: "#244a40",
-          soft: "#e8f0ed",
+          DEFAULT: "#1a2a5a",
+          deep: "#121e42",
+          soft: "#e8ecf5",
         },
       },
       fontFamily: {
