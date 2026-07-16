@@ -27,8 +27,6 @@ export const CONTACT = {
     phone: "+5493794243737",
     /** Número sin + ni espacios, para wa.me */
     phoneDigits: "5493794243737",
-    message:
-      "Hola, quiero ser padrino de Emaús y me gustaría consultar sobre cómo donar. ¡Gracias!",
   },
 } as const;
 

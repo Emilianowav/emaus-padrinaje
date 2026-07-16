@@ -4,8 +4,7 @@ import { useState } from "react";
 import { CONTACT } from "@/config/donations";
 
 function buildWhatsAppUrl() {
-  const text = encodeURIComponent(CONTACT.whatsapp.message);
-  return `https://wa.me/${CONTACT.whatsapp.phoneDigits}?text=${text}`;
+  return `https://wa.me/${CONTACT.whatsapp.phoneDigits}`;
 }
 
 export function ContactActions() {
