@@ -20,6 +20,18 @@ export const SITE = {
   footerNote: "Pago seguro a través de Mercado Pago",
 } as const;
 
+export const CONTACT = {
+  alias: "emaus1.icm",
+  aliasLabel: "Alias",
+  whatsapp: {
+    phone: "+5493794243737",
+    /** Número sin + ni espacios, para wa.me */
+    phoneDigits: "5493794243737",
+    message:
+      "Hola, quiero ser padrino de Emaús y me gustaría consultar sobre cómo donar. ¡Gracias!",
+  },
+} as const;
+
 export const STEPS = [
   {
     number: "01",

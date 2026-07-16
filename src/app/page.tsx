@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ContactActions } from "@/components/ContactActions";
 import { DonationButtons } from "@/components/DonationButtons";
 import { Steps } from "@/components/Steps";
 import { SITE } from "@/config/donations";
@@ -58,6 +59,13 @@ export default function HomePage() {
               Elegí tu aporte
             </p>
             <DonationButtons />
+          </div>
+
+          <div className="mt-12 animate-fade-up opacity-0 [animation-delay:500ms] sm:mt-14">
+            <p className="mb-5 text-center text-sm font-medium uppercase tracking-[0.14em] text-navy-muted">
+              Otras formas de aportar
+            </p>
+            <ContactActions />
           </div>
         </section>
 
