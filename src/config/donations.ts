@@ -13,9 +13,10 @@ export type DonationOption = {
 
 export const SITE = {
   brand: "Emaús",
-  title: "Sé un Padrino",
-  subtitle:
-    "Tu aporte acompaña a quienes más lo necesitan. Tres pasos, y listo.",
+  title: "Sé un padrino de Emaús",
+  community: "1 Inmaculado Corazón de María (ICM)",
+  subtitle: "Tu aporte es muy importante.",
+  quote: "Dios no se deja ganar en generosidad.",
   footerNote: "Pago seguro a través de Mercado Pago",
 } as const;
 
@@ -55,5 +56,11 @@ export const DONATION_OPTIONS: DonationOption[] = [
     label: "$50.000",
     description: "Aporte especial",
     url: "https://mpago.la/1S3WZj5",
+  },
+  {
+    id: "otro-monto",
+    label: "Otro monto",
+    description: "Elegí el monto en Mercado Pago",
+    url: "https://link.mercadopago.com.ar/emausctesdonacion",
   },
 ];

@@ -12,13 +12,13 @@ export function DonationButtons() {
           return (
             <div
               key={option.id}
-              className="flex w-full items-center justify-between border border-dashed border-ink/20 bg-white/40 px-5 py-4 text-left"
+              className="flex w-full items-center justify-between border border-dashed border-navy/20 bg-white/50 px-5 py-4 text-left"
             >
               <div>
-                <p className="font-display text-2xl text-ink/40">{option.label}</p>
-                <p className="mt-0.5 text-sm text-ink-muted">{option.description}</p>
+                <p className="font-display text-2xl text-navy/40">{option.label}</p>
+                <p className="mt-0.5 text-sm text-navy-muted">{option.description}</p>
               </div>
-              <span className="text-xs uppercase tracking-wider text-ink-muted">
+              <span className="text-xs uppercase tracking-wider text-navy-muted">
                 Link pendiente
               </span>
             </div>
@@ -31,17 +31,17 @@ export function DonationButtons() {
             href={option.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex w-full items-center justify-between border border-pine/20 bg-white/70 px-5 py-4 text-left transition duration-300 hover:border-pine hover:bg-pine hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine"
+            className="group flex w-full items-center justify-between border border-navy/15 bg-white/80 px-5 py-4 text-left shadow-[0_0_0_1px_transparent] transition duration-300 hover:border-gold hover:bg-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
           >
             <div>
-              <p className="font-display text-2xl text-ink transition-colors group-hover:text-white">
+              <p className="font-display text-2xl text-navy transition-colors group-hover:text-cream">
                 {option.label}
               </p>
-              <p className="mt-0.5 text-sm text-ink-soft transition-colors group-hover:text-white/80">
+              <p className="mt-0.5 text-sm text-navy-soft transition-colors group-hover:text-gold-soft">
                 {option.description}
               </p>
             </div>
-            <span className="text-sm font-medium text-pine transition-colors group-hover:text-white">
+            <span className="text-sm font-medium text-gold transition-colors group-hover:text-gold-soft">
               Donar →
             </span>
           </a>
@@ -49,9 +49,9 @@ export function DonationButtons() {
       })}
 
       {!hasAnyLink && (
-        <p className="pt-2 text-sm text-ink-muted">
+        <p className="pt-2 text-sm text-navy-muted">
           Los botones se activan cuando agregues los links de Mercado Pago en{" "}
-          <code className="rounded bg-ink/5 px-1.5 py-0.5 text-xs text-ink-soft">
+          <code className="rounded bg-navy/5 px-1.5 py-0.5 text-xs text-navy-soft">
             src/config/donations.ts
           </code>
           .

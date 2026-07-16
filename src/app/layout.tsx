@@ -15,9 +15,9 @@ const sans = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Emaús | Sé un Padrino",
+  title: "Emaús | Sé un padrino",
   description:
-    "Convertite en padrino de Emaús. Doná de forma simple y segura a través de Mercado Pago.",
+    "Sé un padrino de Emaús 1 Inmaculado Corazón de María (ICM). Tu aporte es muy importante. Dios no se deja ganar en generosidad.",
 };
 
 export default function RootLayout({

@@ -8,19 +8,25 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ink: {
-          DEFAULT: "#1a2332",
-          soft: "#3d4a5c",
-          muted: "#6b7a8f",
-        },
-        sand: {
-          DEFAULT: "#f7f5f1",
-          warm: "#efeae2",
-        },
-        pine: {
-          DEFAULT: "#1a2a5a",
+        navy: {
+          DEFAULT: "#1b2a5a",
           deep: "#121e42",
-          soft: "#e8ecf5",
+          soft: "#3d4f7a",
+          muted: "#6b7a9e",
+          mist: "#eef1f8",
+        },
+        gold: {
+          DEFAULT: "#c9a227",
+          soft: "#e8d48a",
+          mist: "#f7f1de",
+        },
+        heart: {
+          DEFAULT: "#c41e3a",
+          soft: "#f3d4da",
+        },
+        cream: {
+          DEFAULT: "#fffcf7",
+          warm: "#f8f4ec",
         },
       },
       fontFamily: {
