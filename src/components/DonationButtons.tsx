@@ -16,7 +16,9 @@ export function DonationButtons() {
             >
               <div>
                 <p className="font-display text-2xl text-navy/40">{option.label}</p>
-                <p className="mt-0.5 text-sm text-navy-muted">{option.description}</p>
+                {option.description ? (
+                  <p className="mt-0.5 text-sm text-navy-muted">{option.description}</p>
+                ) : null}
               </div>
               <span className="text-xs uppercase tracking-wider text-navy-muted">
                 Link pendiente
@@ -37,9 +39,11 @@ export function DonationButtons() {
               <p className="font-display text-2xl text-navy transition-colors group-hover:text-cream">
                 {option.label}
               </p>
-              <p className="mt-0.5 text-sm text-navy-soft transition-colors group-hover:text-gold-soft">
-                {option.description}
-              </p>
+              {option.description ? (
+                <p className="mt-0.5 text-sm text-navy-soft transition-colors group-hover:text-gold-soft">
+                  {option.description}
+                </p>
+              ) : null}
             </div>
             <span className="text-sm font-medium text-gold transition-colors group-hover:text-gold-soft">
               Donar →

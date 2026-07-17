@@ -52,19 +52,19 @@ export const DONATION_OPTIONS: DonationOption[] = [
   {
     id: "10000",
     label: "$10.000",
-    description: "Aporte solidario",
+    description: "",
     url: "https://mpago.la/1MKzW8q",
   },
   {
     id: "20000",
     label: "$20.000",
-    description: "Aporte padrino",
+    description: "",
     url: "https://mpago.la/28vdSXT",
   },
   {
     id: "50000",
     label: "$50.000",
-    description: "Aporte especial",
+    description: "",
     url: "https://mpago.la/1S3WZj5",
   },
   {
