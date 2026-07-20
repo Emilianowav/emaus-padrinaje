@@ -2,6 +2,7 @@
  * Links de pago de Mercado Pago
  * --------------------------------
  * Para agregar o cambiar montos, editá este array.
+ * Para pausar / reactivar los pagos: cambiá DONATIONS_PAUSED.
  */
 
 export type DonationOption = {
@@ -11,6 +12,9 @@ export type DonationOption = {
   url: string;
 };
 
+/** true = links de Mercado Pago desactivados en la UI */
+export const DONATIONS_PAUSED = true;
+
 export const SITE = {
   brand: "Emaús",
   title: "Sé un padrino de Emaús",
@@ -18,6 +22,9 @@ export const SITE = {
   subtitle: "Tu aporte es muy importante.",
   quote: "Dios no se deja ganar en generosidad.",
   footerNote: "Pago seguro a través de Mercado Pago",
+  pausedTitle: "Donaciones pausadas",
+  pausedMessage:
+    "Los links de Mercado Pago están temporalmente desactivados. Pronto estarán disponibles de nuevo.",
 } as const;
 
 export const CONTACT = {

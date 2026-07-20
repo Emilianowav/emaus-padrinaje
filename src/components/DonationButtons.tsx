@@ -1,18 +1,33 @@
-import { DONATION_OPTIONS } from "@/config/donations";
+import { DONATION_OPTIONS, DONATIONS_PAUSED, SITE } from "@/config/donations";
 
 export function DonationButtons() {
   const hasAnyLink = DONATION_OPTIONS.some((option) => option.url.trim());
 
   return (
     <div className="space-y-3">
+      {DONATIONS_PAUSED && (
+        <div
+          role="status"
+          className="border border-gold/40 bg-gold-mist/70 px-5 py-4 text-center"
+        >
+          <p className="text-sm font-medium uppercase tracking-[0.14em] text-navy">
+            {SITE.pausedTitle}
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-navy-soft sm:text-base">
+            {SITE.pausedMessage}
+          </p>
+        </div>
+      )}
+
       {DONATION_OPTIONS.map((option) => {
-        const ready = Boolean(option.url.trim());
+        const ready = Boolean(option.url.trim()) && !DONATIONS_PAUSED;
 
         if (!ready) {
           return (
             <div
               key={option.id}
               className="flex w-full items-center justify-between border border-dashed border-navy/20 bg-white/50 px-5 py-4 text-left"
+              aria-disabled="true"
             >
               <div>
                 <p className="font-display text-2xl text-navy/40">{option.label}</p>
@@ -21,7 +36,7 @@ export function DonationButtons() {
                 ) : null}
               </div>
               <span className="text-xs uppercase tracking-wider text-navy-muted">
-                Link pendiente
+                {DONATIONS_PAUSED ? "Pausado" : "Link pendiente"}
               </span>
             </div>
           );
@@ -52,7 +67,7 @@ export function DonationButtons() {
         );
       })}
 
-      {!hasAnyLink && (
+      {!hasAnyLink && !DONATIONS_PAUSED && (
         <p className="pt-2 text-sm text-navy-muted">
           Los botones se activan cuando agregues los links de Mercado Pago en{" "}
           <code className="rounded bg-navy/5 px-1.5 py-0.5 text-xs text-navy-soft">

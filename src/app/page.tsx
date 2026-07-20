@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ContactActions } from "@/components/ContactActions";
 import { DonationButtons } from "@/components/DonationButtons";
 import { Steps } from "@/components/Steps";
-import { SITE } from "@/config/donations";
+import { DONATIONS_PAUSED, SITE } from "@/config/donations";
 
 export default function HomePage() {
   return (
@@ -70,7 +70,9 @@ export default function HomePage() {
         </section>
 
         <footer className="mt-14 animate-fade-in border-t border-navy/10 pt-6 text-center opacity-0 [animation-delay:550ms] sm:mt-16">
-          <p className="text-sm text-navy-muted">{SITE.footerNote}</p>
+          <p className="text-sm text-navy-muted">
+            {DONATIONS_PAUSED ? SITE.pausedTitle : SITE.footerNote}
+          </p>
         </footer>
       </div>
     </main>
