@@ -17,15 +17,11 @@ export const CONTACT = {
   alias: "icm.parroquia",
   aliasLabel: "Alias",
   account: {
+    banco: "BANCO DE CORRIENTES",
     titular: "PARROQUIA INMACULADO CORAZON D",
     cuil: "30714998923",
     tipo: "Cuenta corriente en pesos",
     cbu: "0940099330011118160013",
-  },
-  mercadoPago: {
-    label: "Mercado Pago",
-    description: "Transferí el monto que quieras",
-    url: "https://link.mercadopago.com.ar/emausctesdonacion",
   },
   whatsapp: {
     phone: "+5493794243737",
@@ -40,12 +36,12 @@ export const STEPS = [
   {
     number: "01",
     title: "Transferí tu aporte",
-    text: "Usá el alias, el CBU o Mercado Pago con el monto que elijas.",
+    text: "Usá el alias o el CBU de la cuenta parroquial.",
   },
   {
     number: "02",
     title: "Verificá los datos",
-    text: "Confirmá titular, CUIL y tipo de cuenta antes de enviar.",
+    text: "Confirmá banco, titular, CUIL y tipo de cuenta antes de enviar.",
   },
   {
     number: "03",
