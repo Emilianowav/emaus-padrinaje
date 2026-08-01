@@ -1,24 +1,14 @@
 # Emaús — Sé un Padrino
 
-Landing de una página para donaciones con Mercado Pago. Hecha con Next.js y lista para publicar en Vercel.
+Landing de una página para donaciones por transferencia bancaria. Hecha con Next.js y lista para publicar en Vercel.
 
-## Cómo agregar los links de pago
+## Datos de transferencia
 
-Abrí el archivo `src/config/donations.ts` y pegá cada link de Mercado Pago en el campo `url`:
+Todo se edita en `src/config/donations.ts`:
 
-```ts
-export const DONATION_OPTIONS = [
-  {
-    id: "monto-1",
-    label: "$5.000",
-    description: "Aporte solidario",
-    url: "https://mpago.la/tu-link-aqui",
-  },
-  // ...
-];
-```
-
-Podés cambiar montos, textos o agregar más opciones sin tocar el resto de la página.
+- Alias, titular, CUIL, tipo de cuenta y CBU
+- Número de WhatsApp para enviar el comprobante
+- Textos del sitio y pasos
 
 ## Desarrollo local
 
@@ -35,17 +25,3 @@ Abrí [http://localhost:3000](http://localhost:3000).
 2. En [vercel.com](https://vercel.com) → **Add New Project** → importá el repo.
 3. Dejá los valores por defecto (Next.js se detecta solo).
 4. Deploy.
-
-O desde la terminal:
-
-```bash
-npx vercel
-```
-
-## Personalizar textos
-
-En el mismo archivo `src/config/donations.ts` podés editar:
-
-- `SITE.brand`, `SITE.title`, `SITE.subtitle`
-- Los pasos en `STEPS`
-- Las opciones de donación en `DONATION_OPTIONS`

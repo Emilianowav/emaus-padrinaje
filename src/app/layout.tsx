@@ -17,7 +17,7 @@ const sans = Outfit({
 export const metadata: Metadata = {
   title: "Emaús | Sé un padrino",
   description:
-    "Sé un padrino de Emaús 1 Inmaculado Corazón de María (ICM). Tu aporte es muy importante. Dios no se deja ganar en generosidad.",
+    "Sé un padrino de Emaús. Transferí tu aporte y enviá el comprobante por WhatsApp.",
 };
 
 export default function RootLayout({

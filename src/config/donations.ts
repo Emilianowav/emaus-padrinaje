@@ -1,19 +1,8 @@
 /**
- * Links de pago de Mercado Pago
- * --------------------------------
- * Para agregar o cambiar montos, editá este array.
- * Para pausar / reactivar los pagos: cambiá DONATIONS_PAUSED.
+ * Datos de donación por transferencia
+ * ------------------------------------
+ * Editá alias, cuenta y WhatsApp acá.
  */
-
-export type DonationOption = {
-  id: string;
-  label: string;
-  description: string;
-  url: string;
-};
-
-/** true = links de Mercado Pago desactivados en la UI */
-export const DONATIONS_PAUSED = true;
 
 export const SITE = {
   brand: "Emaús",
@@ -21,63 +10,41 @@ export const SITE = {
   community: "\"Inmaculado Corazón de María\" (ICM) I",
   subtitle: "Tu aporte es muy importante.",
   quote: "Dios no se deja ganar en generosidad.",
-  footerNote: "Pago seguro a través de Mercado Pago",
-  pausedTitle: "Donaciones pausadas",
-  pausedMessage:
-    "Los links de Mercado Pago están temporalmente desactivados. Pronto estarán disponibles de nuevo.",
+  footerNote: "Transferencia bancaria · Enviá tu comprobante por WhatsApp",
 } as const;
 
 export const CONTACT = {
-  alias: "emaus1.icm",
+  alias: "icm.parroquia",
   aliasLabel: "Alias",
+  account: {
+    titular: "PARROQUIA INMACULADO CORAZON D",
+    cuil: "30714998923",
+    tipo: "Cuenta corriente en pesos",
+    cbu: "0940099330011118160013",
+  },
   whatsapp: {
     phone: "+5493794243737",
     /** Número sin + ni espacios, para wa.me */
     phoneDigits: "5493794243737",
   },
+  comprobanteNotice:
+    "Importante: después de transferir, enviá el comprobante al WhatsApp para registrar tu aporte.",
 } as const;
 
 export const STEPS = [
   {
     number: "01",
-    title: "Elegí un monto",
-    text: "Seleccioná el aporte con el que querés acompañar.",
+    title: "Transferí tu aporte",
+    text: "Usá el alias o el CBU de la cuenta parroquial.",
   },
   {
     number: "02",
-    title: "Hacé clic en donar",
-    text: "Te redirigimos a Mercado Pago de forma segura.",
+    title: "Verificá los datos",
+    text: "Confirmá titular, CUIL y tipo de cuenta antes de enviar.",
   },
   {
     number: "03",
-    title: "Confirmá el pago",
-    text: "Completá el pago y ya sos padrino de Emaús.",
+    title: "Enviá el comprobante",
+    text: "Mandá el comprobante por WhatsApp para registrar tu padrinaje.",
   },
 ] as const;
-
-export const DONATION_OPTIONS: DonationOption[] = [
-  {
-    id: "10000",
-    label: "$10.000",
-    description: "",
-    url: "https://mpago.la/1MKzW8q",
-  },
-  {
-    id: "20000",
-    label: "$20.000",
-    description: "",
-    url: "https://mpago.la/28vdSXT",
-  },
-  {
-    id: "50000",
-    label: "$50.000",
-    description: "",
-    url: "https://mpago.la/1S3WZj5",
-  },
-  {
-    id: "otro-monto",
-    label: "Otro monto",
-    description: "Elegí el monto en Mercado Pago",
-    url: "https://link.mercadopago.com.ar/emausctesdonacion",
-  },
-];

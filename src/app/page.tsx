@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { ContactActions } from "@/components/ContactActions";
-import { DonationButtons } from "@/components/DonationButtons";
 import { Steps } from "@/components/Steps";
-import { DONATIONS_PAUSED, SITE } from "@/config/donations";
+import { SITE } from "@/config/donations";
 
 export default function HomePage() {
   return (
@@ -56,23 +55,14 @@ export default function HomePage() {
 
           <div className="mt-12 animate-fade-up opacity-0 [animation-delay:420ms] sm:mt-14">
             <p className="mb-5 text-center text-sm font-medium uppercase tracking-[0.14em] text-navy-muted">
-              Elegí tu aporte
-            </p>
-            <DonationButtons />
-          </div>
-
-          <div className="mt-12 animate-fade-up opacity-0 [animation-delay:500ms] sm:mt-14">
-            <p className="mb-5 text-center text-sm font-medium uppercase tracking-[0.14em] text-navy-muted">
-              Otras formas de aportar
+              Datos para transferir
             </p>
             <ContactActions />
           </div>
         </section>
 
         <footer className="mt-14 animate-fade-in border-t border-navy/10 pt-6 text-center opacity-0 [animation-delay:550ms] sm:mt-16">
-          <p className="text-sm text-navy-muted">
-            {DONATIONS_PAUSED ? SITE.pausedTitle : SITE.footerNote}
-          </p>
+          <p className="text-sm text-navy-muted">{SITE.footerNote}</p>
         </footer>
       </div>
     </main>
