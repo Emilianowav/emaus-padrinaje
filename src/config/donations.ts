@@ -22,6 +22,11 @@ export const CONTACT = {
     tipo: "Cuenta corriente en pesos",
     cbu: "0940099330011118160013",
   },
+  mercadoPago: {
+    label: "Mercado Pago",
+    description: "Transferí el monto que quieras",
+    url: "https://link.mercadopago.com.ar/emausctesdonacion",
+  },
   whatsapp: {
     phone: "+5493794243737",
     /** Número sin + ni espacios, para wa.me */
@@ -35,7 +40,7 @@ export const STEPS = [
   {
     number: "01",
     title: "Transferí tu aporte",
-    text: "Usá el alias o el CBU de la cuenta parroquial.",
+    text: "Usá el alias, el CBU o Mercado Pago con el monto que elijas.",
   },
   {
     number: "02",

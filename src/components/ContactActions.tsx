@@ -64,6 +64,25 @@ export function ContactActions() {
         </span>
       </button>
 
+      <a
+        href={CONTACT.mercadoPago.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex w-full items-center justify-between border border-navy/15 bg-white/80 px-5 py-4 text-left transition duration-300 hover:border-gold hover:bg-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+      >
+        <div>
+          <p className="font-display text-2xl text-navy transition-colors group-hover:text-cream">
+            {CONTACT.mercadoPago.label}
+          </p>
+          <p className="mt-0.5 text-sm text-navy-soft transition-colors group-hover:text-gold-soft">
+            {CONTACT.mercadoPago.description}
+          </p>
+        </div>
+        <span className="text-sm font-medium text-gold transition-colors group-hover:text-gold-soft">
+          Transferir →
+        </span>
+      </a>
+
       <div className="border border-navy/15 bg-white/80 px-5 py-4">
         <p className="text-xs font-medium uppercase tracking-[0.14em] text-navy-muted">
           Datos para verificar
