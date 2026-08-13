@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getTrackToken } from "@/config/analytics";
 import { recordVisit } from "@/lib/analytics";
 
 export async function POST(request: NextRequest) {
-  const expected =
-    process.env.ANALYTICS_TRACK_TOKEN ??
-    process.env.ANALYTICS_SECRET ??
-    "emaus-track-2026";
   const auth = request.headers.get("x-analytics-token");
-  if (auth !== expected) {
+  if (auth !== getTrackToken()) {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getStats, isValidSecret } from "@/lib/analytics";
+import { isValidSecret } from "@/config/analytics";
+import { getStats } from "@/lib/analytics";
 
 export async function GET(
   request: NextRequest,

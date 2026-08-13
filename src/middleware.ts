@@ -1,21 +1,13 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { getTrackToken } from "@/config/analytics";
 
 export async function middleware(request: NextRequest) {
   if (request.method !== "GET") {
     return NextResponse.next();
   }
 
-  const { pathname } = request.nextUrl;
-  if (pathname !== "/") {
-    return NextResponse.next();
-  }
-
-  const trackToken =
-    process.env.ANALYTICS_TRACK_TOKEN ??
-    process.env.ANALYTICS_SECRET ??
-    "emaus-track-2026";
-  if (!trackToken) {
+  if (request.nextUrl.pathname !== "/") {
     return NextResponse.next();
   }
 
@@ -24,7 +16,7 @@ export async function middleware(request: NextRequest) {
   void fetch(trackUrl, {
     method: "POST",
     headers: {
-      "x-analytics-token": trackToken,
+      "x-analytics-token": getTrackToken(),
       "x-vercel-ip-country": request.headers.get("x-vercel-ip-country") ?? "",
       "x-vercel-ip-city": request.headers.get("x-vercel-ip-city") ?? "",
       "x-vercel-ip-country-region":

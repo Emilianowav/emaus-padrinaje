@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
+import { getAnalyticsSecret, isValidSecret } from "@/config/analytics";
 import {
-  getAnalyticsSecret,
   getStats,
-  isValidSecret,
   sortRecord,
   type DayStats,
 } from "@/lib/analytics";
@@ -122,8 +121,12 @@ export default async function AnalyticsPage({ params }: PageProps) {
         </section>
 
         {stats.storage === "none" && (
-          <div className="mt-6 border border-gold/40 bg-gold-mist/70 px-5 py-4 text-sm text-navy-soft">
-            Configurá Upstash Redis en Vercel para persistir visitas en producción.
+          <div className="mt-6 border border-heart/40 bg-heart-soft/80 px-5 py-4 text-sm text-heart">
+            Para guardar visitas en Vercel, pegá un token de GitHub en{" "}
+            <code className="rounded bg-white/60 px-1.5 py-0.5 text-xs">
+              src/config/analytics.ts
+            </code>
+            . Sin variables de entorno.
           </div>
         )}
 
