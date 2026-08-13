@@ -2,9 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
+  countryFlagUrl,
   formatDate,
   formatMonthLabel,
   todayInArgentina,
+  type CountryCount,
   type DayBreakdown,
   type DayCount,
 } from "@/lib/visitors";
@@ -99,14 +101,7 @@ export function VisitorDashboard({
     void loadMonth(nextYear, nextMonth);
   }
 
-  function handleSelect(date: string) {
-    setSelectedDate(date);
-  }
-
   const selectedTotal = breakdown?.total ?? 0;
-  const countrySum =
-    breakdown?.countries.reduce((sum, item) => sum + item.total, 0) ?? 0;
-  const citySum = breakdown?.cities.reduce((sum, item) => sum + item.total, 0) ?? 0;
 
   return (
     <div className="space-y-8">
@@ -157,7 +152,7 @@ export function VisitorDashboard({
               <button
                 key={cell.date}
                 type="button"
-                onClick={() => handleSelect(cell.date!)}
+                onClick={() => setSelectedDate(cell.date!)}
                 className={`aspect-square rounded-sm border p-1 text-left transition ${
                   isSelected
                     ? "border-navy bg-navy text-cream"
@@ -191,27 +186,20 @@ export function VisitorDashboard({
         {loadingDay ? (
           <p className="mt-4 text-sm text-navy-muted">Cargando...</p>
         ) : breakdown && breakdown.total > 0 ? (
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <CountList title="Por país" items={breakdown.countries} />
-            <CountList title="Por localidad" items={breakdown.cities} />
-          </div>
+          <ul className="mt-6 space-y-3">
+            {breakdown.countries.map((item) => (
+              <CountryRow key={item.code} item={item} />
+            ))}
+          </ul>
         ) : (
           <p className="mt-4 text-sm text-navy-muted">
             No hubo visitas este día.
           </p>
         )}
 
-        <div className="mt-6 border-t border-navy/10 pt-4">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-navy-soft">Total del día</span>
-            <span className="font-display text-2xl text-navy">{selectedTotal}</span>
-          </div>
-          {breakdown && breakdown.total > 0 && (
-            <div className="mt-2 flex flex-wrap gap-4 text-xs text-navy-muted">
-              <span>Países registrados: {countrySum}</span>
-              <span>Localidades registradas: {citySum}</span>
-            </div>
-          )}
+        <div className="mt-6 flex items-center justify-between border-t border-navy/10 pt-4 text-sm">
+          <span className="text-navy-soft">Total del día</span>
+          <span className="font-display text-2xl text-navy">{selectedTotal}</span>
         </div>
       </section>
 
@@ -232,29 +220,31 @@ export function VisitorDashboard({
   );
 }
 
-function CountList({
-  title,
-  items,
-}: {
-  title: string;
-  items: { label: string; total: number }[];
-}) {
+function CountryRow({ item }: { item: CountryCount }) {
+  const flag = countryFlagUrl(item.code);
+
   return (
-    <div>
-      <h3 className="text-xs font-medium uppercase tracking-[0.14em] text-navy-muted">
-        {title}
-      </h3>
-      <ul className="mt-3 space-y-2">
-        {items.map((item) => (
-          <li
-            key={item.label}
-            className="flex items-center justify-between text-sm text-navy-soft"
+    <li className="flex items-center justify-between gap-3 text-sm">
+      <span className="flex items-center gap-3 text-navy-soft">
+        {flag ? (
+          <img
+            src={flag}
+            alt=""
+            width={28}
+            height={20}
+            className="h-5 w-7 rounded-[2px] object-cover shadow-sm"
+          />
+        ) : (
+          <span
+            aria-hidden
+            className="flex h-5 w-7 items-center justify-center rounded-[2px] bg-navy/10 text-xs"
           >
-            <span>{item.label}</span>
-            <span className="font-medium text-navy">{item.total}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+            ?
+          </span>
+        )}
+        {item.label}
+      </span>
+      <span className="font-medium text-navy">{item.total}</span>
+    </li>
   );
 }

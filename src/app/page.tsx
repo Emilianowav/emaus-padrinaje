@@ -1,13 +1,20 @@
 import Image from "next/image";
+import { headers } from "next/headers";
 import { ContactActions } from "@/components/ContactActions";
 import { Steps } from "@/components/Steps";
 import { VisitTracker } from "@/components/VisitTracker";
 import { SITE } from "@/config/donations";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const headerList = await headers();
+  const country =
+    headerList.get("x-vercel-ip-country") ??
+    headerList.get("cf-ipcountry") ??
+    "XX";
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-cream">
-      <VisitTracker />
+      <VisitTracker country={country} />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
