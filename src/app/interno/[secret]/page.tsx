@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
+import { VisitorDashboard } from "@/components/VisitorDashboard";
 import { VISITORS } from "@/config/visitors";
-import { formatDate, getVisitorStats } from "@/lib/visitors";
+import {
+  getMonthDayTotals,
+  getTotalVisits,
+  todayInArgentina,
+} from "@/lib/visitors";
 
 type PageProps = {
   params: Promise<{ secret: string }>;
@@ -14,7 +19,12 @@ export default async function InternoPage({ params }: PageProps) {
     notFound();
   }
 
-  const stats = await getVisitorStats();
+  const today = todayInArgentina();
+  const [year, month] = today.split("-").map(Number);
+  const [totalVisits, initialDays] = await Promise.all([
+    getTotalVisits(),
+    getMonthDayTotals(year, month),
+  ]);
 
   return (
     <main className="min-h-screen bg-cream px-6 py-10 sm:px-8 sm:py-14">
@@ -27,86 +37,20 @@ export default async function InternoPage({ params }: PageProps) {
             Historial de visitantes
           </h1>
           <p className="mt-3 text-navy-soft">
-            Visitas por día, país y localidad. Esta página no está enlazada en el
-            sitio.
+            Elegí un día en el calendario para ver el desglose.
           </p>
         </header>
 
-        <section className="mt-8 grid gap-4 sm:grid-cols-3">
-          <StatCard label="Total visitas" value={stats.totalVisits} />
-          <StatCard
-            label="Hoy"
-            value={stats.days[0]?.total ?? 0}
+        <div className="mt-8">
+          <VisitorDashboard
+            totalVisits={totalVisits}
+            initialYear={year}
+            initialMonth={month}
+            initialDays={initialDays}
           />
-          <StatCard
-            label="Días con visitas"
-            value={stats.days.filter((day) => day.total > 0).length}
-          />
-        </section>
-
-        <section className="mt-8">
-          <h2 className="text-sm font-medium uppercase tracking-[0.14em] text-navy-muted">
-            Por día
-          </h2>
-          <ul className="mt-4 divide-y divide-navy/10 border border-navy/15 bg-white/90">
-            {stats.days.map((day) => (
-              <li
-                key={day.date}
-                className="flex items-center justify-between px-5 py-3 text-sm"
-              >
-                <span className="text-navy">{formatDate(day.date)}</span>
-                <span className="font-medium text-navy">{day.total}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="mt-8 grid gap-4 sm:grid-cols-2">
-          <CountList title="Por país" items={stats.countries} />
-          <CountList title="Por localidad" items={stats.cities} />
-        </section>
+        </div>
       </div>
     </main>
-  );
-}
-
-function StatCard({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="border border-navy/15 bg-white/90 p-4">
-      <p className="text-xs uppercase tracking-wider text-navy-muted">{label}</p>
-      <p className="mt-2 font-display text-3xl text-navy">{value}</p>
-    </div>
-  );
-}
-
-function CountList({
-  title,
-  items,
-}: {
-  title: string;
-  items: { label: string; total: number }[];
-}) {
-  return (
-    <div className="border border-navy/15 bg-white/90 p-5">
-      <h2 className="text-sm font-medium uppercase tracking-[0.14em] text-navy-muted">
-        {title}
-      </h2>
-      {items.length ? (
-        <ul className="mt-4 space-y-2">
-          {items.map((item) => (
-            <li
-              key={item.label}
-              className="flex items-center justify-between text-sm text-navy-soft"
-            >
-              <span>{item.label}</span>
-              <span className="font-medium text-navy">{item.total}</span>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="mt-4 text-sm text-navy-muted">Todavía no hay datos.</p>
-      )}
-    </div>
   );
 }
 

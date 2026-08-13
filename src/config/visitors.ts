@@ -1,7 +1,6 @@
 export const VISITORS = {
   secret: "emaus-interno-2026",
   namespace: "emauspadrinaje",
-  daysToShow: 14,
   countries: [
     { code: "AR", label: "Argentina" },
     { code: "UY", label: "Uruguay" },

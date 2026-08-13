@@ -3,6 +3,13 @@ import { VISITORS } from "@/config/visitors";
 export type DayCount = { date: string; total: number };
 export type NamedCount = { label: string; total: number };
 
+export type DayBreakdown = {
+  date: string;
+  total: number;
+  countries: NamedCount[];
+  cities: NamedCount[];
+};
+
 export type VisitorStats = {
   totalVisits: number;
   days: DayCount[];
@@ -12,20 +19,14 @@ export type VisitorStats = {
 
 const BASE = "https://abacus.jasoncameron.dev";
 const NS = VISITORS.namespace;
+const TZ = "America/Argentina/Buenos_Aires";
 
-function todayKey(date = new Date()) {
-  return date.toISOString().slice(0, 10);
+function dateKey(date = new Date()) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: TZ }).format(date);
 }
 
-function dayKeys(count: number) {
-  const keys: string[] = [];
-  const now = new Date();
-  for (let i = 0; i < count; i += 1) {
-    const d = new Date(now);
-    d.setUTCDate(now.getUTCDate() - i);
-    keys.push(todayKey(d));
-  }
-  return keys;
+function compactDate(date: string) {
+  return date.replace(/-/g, "");
 }
 
 function slug(value: string) {
@@ -62,30 +63,107 @@ async function abacus(path: string) {
   return Number(data.value ?? 0);
 }
 
+function dayPrefix(date: string) {
+  return `d${compactDate(date)}`;
+}
+
 export async function recordVisit(input: {
   country: string;
   city: string;
 }) {
-  const date = todayKey();
+  const date = dateKey();
   const country = countryCode(input.country);
   const city = cityKey(input.city);
+  const prefix = dayPrefix(date);
 
   await Promise.all([
     abacus(`/hit/${NS}/total`),
-    abacus(`/hit/${NS}/d${date.replace(/-/g, "")}`),
+    abacus(`/hit/${NS}/${prefix}`),
+    abacus(`/hit/${NS}/${prefix}c${country}`),
+    abacus(`/hit/${NS}/${prefix}v${city}`),
     abacus(`/hit/${NS}/c${country}`),
     abacus(`/hit/${NS}/v${city}`),
   ]);
 }
 
-export async function getVisitorStats(): Promise<VisitorStats> {
-  const dates = dayKeys(VISITORS.daysToShow);
+export async function getTotalVisits() {
+  return abacus(`/get/${NS}/total`);
+}
 
-  const [totalVisits, dayValues, countryValues, cityValues] = await Promise.all([
-    abacus(`/get/${NS}/total`),
+export async function getDayBreakdown(date: string): Promise<DayBreakdown> {
+  const prefix = dayPrefix(date);
+
+  const [total, countryValues, cityValues] = await Promise.all([
+    abacus(`/get/${NS}/${prefix}`),
     Promise.all(
-      dates.map((date) => abacus(`/get/${NS}/d${date.replace(/-/g, "")}`)),
+      VISITORS.countries.map((country) =>
+        abacus(`/get/${NS}/${prefix}c${country.code}`),
+      ),
     ),
+    Promise.all(
+      VISITORS.cities.map((city) =>
+        abacus(`/get/${NS}/${prefix}v${city.key}`),
+      ),
+    ),
+  ]);
+
+  return {
+    date,
+    total,
+    countries: VISITORS.countries
+      .map((country, index) => ({
+        label: country.label,
+        total: countryValues[index] ?? 0,
+      }))
+      .filter((item) => item.total > 0)
+      .sort((a, b) => b.total - a.total),
+    cities: VISITORS.cities
+      .map((city, index) => ({
+        label: city.label,
+        total: cityValues[index] ?? 0,
+      }))
+      .filter((item) => item.total > 0)
+      .sort((a, b) => b.total - a.total),
+  };
+}
+
+export async function getMonthDayTotals(
+  year: number,
+  month: number,
+): Promise<DayCount[]> {
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const dates = Array.from({ length: daysInMonth }, (_, index) => {
+    const day = String(index + 1).padStart(2, "0");
+    const monthStr = String(month).padStart(2, "0");
+    return `${year}-${monthStr}-${day}`;
+  });
+
+  const totals = await Promise.all(
+    dates.map((date) => abacus(`/get/${NS}/${dayPrefix(date)}`)),
+  );
+
+  return dates.map((date, index) => ({
+    date,
+    total: totals[index] ?? 0,
+  }));
+}
+
+export async function getVisitorStats(): Promise<VisitorStats> {
+  const now = new Date();
+  const year = Number(
+    new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric" }).format(
+      now,
+    ),
+  );
+  const month = Number(
+    new Intl.DateTimeFormat("en-CA", { timeZone: TZ, month: "2-digit" }).format(
+      now,
+    ),
+  );
+
+  const [totalVisits, days, countryValues, cityValues] = await Promise.all([
+    getTotalVisits(),
+    getMonthDayTotals(year, month),
     Promise.all(
       VISITORS.countries.map((country) => abacus(`/get/${NS}/c${country.code}`)),
     ),
@@ -94,7 +172,7 @@ export async function getVisitorStats(): Promise<VisitorStats> {
 
   return {
     totalVisits,
-    days: dates.map((date, index) => ({ date, total: dayValues[index] ?? 0 })),
+    days,
     countries: VISITORS.countries
       .map((country, index) => ({
         label: country.label,
@@ -115,4 +193,17 @@ export async function getVisitorStats(): Promise<VisitorStats> {
 export function formatDate(date: string) {
   const [year, month, day] = date.split("-");
   return `${day}/${month}/${year}`;
+}
+
+export function formatMonthLabel(year: number, month: number) {
+  const d = new Date(year, month - 1, 1);
+  return new Intl.DateTimeFormat("es-AR", {
+    month: "long",
+    year: "numeric",
+    timeZone: TZ,
+  }).format(d);
+}
+
+export function todayInArgentina() {
+  return dateKey();
 }
