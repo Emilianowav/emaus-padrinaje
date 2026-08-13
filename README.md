@@ -23,5 +23,16 @@ Abrí [http://localhost:3000](http://localhost:3000).
 
 1. Subí el proyecto a GitHub.
 2. En [vercel.com](https://vercel.com) → **Add New Project** → importá el repo.
-3. Dejá los valores por defecto (Next.js se detecta solo).
-4. Deploy.
+3. Conectá **Upstash Redis** desde el marketplace de Vercel.
+4. Agregá las variables de `.env.example`.
+5. Deploy.
+
+## Historial de visitantes (URL privada)
+
+Página oculta, no enlazada desde el sitio:
+
+```
+/interno/TU_ANALYTICS_SECRET
+```
+
+Registra visitas por día, país y localidad. Ver `.env.example` para configuración.
