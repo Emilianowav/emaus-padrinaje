@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { ContactActions } from "@/components/ContactActions";
 import { Steps } from "@/components/Steps";
+import { VisitTracker } from "@/components/VisitTracker";
 import { SITE } from "@/config/donations";
 
 export default function HomePage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-cream">
+      <VisitTracker />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
