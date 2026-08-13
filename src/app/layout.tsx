@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Outfit } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const display = Fraunces({
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${display.variable} ${sans.variable} font-sans antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
