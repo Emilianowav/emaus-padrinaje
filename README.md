@@ -1,8 +1,8 @@
 # Emaús — Sé un Padrino
 
-Landing de una página para donaciones por transferencia bancaria. Hecha con Next.js y lista para publicar en Vercel.
+Landing de una página para donaciones. El botón principal abre WhatsApp con un mensaje predefinido para pedir información. Hecha con Next.js y lista para publicar en Vercel.
 
-## Datos de transferencia
+## WhatsApp y mensaje predefinido
 
 Todo se edita en `src/config/donations.ts`.
 

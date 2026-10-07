@@ -63,9 +63,6 @@ export default async function HomePage() {
           </div>
 
           <div className="mt-12 animate-fade-up opacity-0 [animation-delay:420ms] sm:mt-14">
-            <p className="mb-5 text-center text-sm font-medium uppercase tracking-[0.14em] text-navy-muted">
-              Datos para transferir
-            </p>
             <ContactActions />
           </div>
         </section>

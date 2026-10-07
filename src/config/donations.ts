@@ -1,7 +1,7 @@
 /**
- * Datos de donación por transferencia
+ * Datos de donación
  * ------------------------------------
- * Editá alias, cuenta y WhatsApp acá.
+ * Editá el WhatsApp y el mensaje predefinido acá.
  */
 
 export const SITE = {
@@ -10,42 +10,34 @@ export const SITE = {
   community: "\"Inmaculado Corazón de María\" (ICM) I",
   subtitle: "Tu aporte es muy importante.",
   quote: "Dios no se deja ganar en generosidad.",
-  footerNote: "Transferencia bancaria · Enviá tu comprobante por WhatsApp",
+  footerNote: "Consultas y donaciones por WhatsApp",
 } as const;
 
 export const CONTACT = {
-  alias: "icm.parroquia",
-  aliasLabel: "Alias",
-  account: {
-    banco: "BANCO DE CORRIENTES",
-    titular: "PARROQUIA INMACULADO CORAZON D",
-    cuil: "30714998923",
-    tipo: "Cuenta corriente en pesos",
-    cbu: "0940099330011118160013",
-  },
+  ctaLabel: "Si querés información para donar, hacé click acá",
   whatsapp: {
     phone: "+5493794243737",
     /** Número sin + ni espacios, para wa.me */
     phoneDigits: "5493794243737",
+    message:
+      "¡Hola! Quisiera recibir información para hacer una donación y ser padrino de Emaús (ICM).",
   },
-  comprobanteNotice:
-    "Importante: después de transferir, enviá el comprobante al WhatsApp para registrar tu aporte.",
 } as const;
 
 export const STEPS = [
   {
     number: "01",
-    title: "Transferí tu aporte",
-    text: "Usá el alias o el CBU de la cuenta parroquial.",
+    title: "Escribinos por WhatsApp",
+    text: "Tocá el botón de abajo y se abrirá un chat con un mensaje listo para enviar.",
   },
   {
     number: "02",
-    title: "Verificá los datos",
-    text: "Confirmá banco, titular, CUIL y tipo de cuenta antes de enviar.",
+    title: "Recibí la información",
+    text: "Te pasamos los datos para que puedas hacer tu aporte.",
   },
   {
     number: "03",
     title: "Enviá el comprobante",
-    text: "Mandá el comprobante por WhatsApp para registrar tu padrinaje.",
+    text: "Mandá el comprobante por el mismo chat para registrar tu padrinaje.",
   },
 ] as const;
